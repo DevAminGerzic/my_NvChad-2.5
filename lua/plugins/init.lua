@@ -1,13 +1,23 @@
 return {
 
+    --{
+    --  "nvim-treesitter/nvim-treesitter",
+    -- event = { "BufReadPre", "BufNewFile" },
+    --config = function()
+    --  require("configs.treesitter")
+    --end,
+    --},
     {
         "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
         event = { "BufReadPre", "BufNewFile" },
+        build = ":TSUpdate",
         config = function()
+            require("nvchad.configs.treesitter")
             require("configs.treesitter")
         end,
     },
-
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
@@ -18,9 +28,12 @@ return {
     },
 
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         event = "VeryLazy",
-        dependencies = { "nvim-lspconfig" },
+        dependencies = {
+            "mason-org/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
         config = function()
             require("configs.mason-lspconfig")
         end,
@@ -61,8 +74,32 @@ return {
     },
     {
         "mfussenegger/nvim-dap",
+        lazy = false,
         config = function()
             require("configs.dap")
+        end,
+    },
+
+    {
+        "rcarriga/nvim-dap-ui",
+        lazy = false,
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
+        },
+        config = function()
+            require("configs.dap-ui")
+        end,
+    },
+    {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "rcarriga/nvim-dap-ui",
+        },
+        config = function()
+            require("configs.dap-python")
         end,
     },
 }

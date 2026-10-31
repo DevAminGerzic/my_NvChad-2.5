@@ -1,4 +1,5 @@
-local lint = package.loaded["lint"]
+--local lint = package.loaded["lint"]
+local lint = require("lint")
 
 -- List of linters to ignore during install
 local ignore_install = {}

@@ -8,17 +8,17 @@ local lspconfig = require("nvchad.configs.lspconfig") -- nvim 0.11
 -- list of all servers configured.
 lspconfig.servers = {
     "lua_ls",
-    -- "clangd",
+    "clangd",
     -- "gopls",
     -- "hls",
     -- "ols",
-    -- "pyright",
+    "pyright",
 }
 
 -- list of servers configured with default config.
 local default_servers = {
     -- "ols",
-    -- "pyright",
+    "pyright",
 }
 
 -- lsps with default config
@@ -31,16 +31,16 @@ for _, lsp in ipairs(default_servers) do
     })
 end
 
--- -- lspconfig.clangd.setup({ -- pre nvim 0.11
--- vim.lsp.config("clangd", { -- nvim 0.11
---     on_attach = function(client, bufnr)
---         client.server_capabilities.documentFormattingProvider = false
---         client.server_capabilities.documentRangeFormattingProvider = false
---         on_attach(client, bufnr)
---     end,
---     on_init = on_init,
---     capabilities = capabilities,
--- })
+--lspconfig.clangd.setup({ -- pre nvim 0.11
+vim.lsp.config("clangd", { -- nvim 0.11
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+})
 
 -- -- lspconfig.gopls.setup({ -- pre nvim 0.11
 -- vim.lsp.config("gopls", { -- nvim 0.11
@@ -79,7 +79,7 @@ end
 --     capabilities = capabilities,
 -- })
 
--- lspconfig.lua_ls.setup({ -- pre nvim 0.11
+--lspconfig.lua_ls.setup({ -- pre nvim 0.11
 vim.lsp.config("lua_ls", { -- nvim 0.11
     on_attach = on_attach,
     on_init = on_init,
@@ -89,7 +89,7 @@ vim.lsp.config("lua_ls", { -- nvim 0.11
         Lua = {
             diagnostics = {
                 enable = false, -- Disable all diagnostics from lua_ls
-                -- globals = { "vim" },
+                 globals = { "vim" },
             },
             workspace = {
                 library = {
