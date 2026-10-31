@@ -59,4 +59,10 @@ return {
             require("configs.mason-conform")
         end,
     },
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            require("configs.dap")
+        end,
+    },
 }
